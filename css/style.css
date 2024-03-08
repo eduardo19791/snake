@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bungee+Spice&display=swap')
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Anton', sans-serif;
+}
+
+body {
+    background: rgba(20, 20, 20, 120);
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+}
+
+canvas {
+    background: rgba(0, 0, 0, 255);
+}
