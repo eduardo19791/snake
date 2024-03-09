@@ -1,7 +1,8 @@
 const canvas = document.querySelector('canvas')
 const ctx = canvas.getContext('2d')
+const audio1 = new Audio('../assets/audio/message-13716.mp3')
 const size = 20
-const time = 100
+const time = 500
 const c1 = "#93827C"
 const c2 = "#79645C"
 const gridLineWidth = 0.5
@@ -20,11 +21,17 @@ const randColor = () => {
     return `rgb(${r},${g},${b})`
 }
 
-const food = ()=> {
+const randomPos = ()=> {
     const x = randNumber(0, canvas.width - size)
     const y = randNumber(0, canvas.height - size)
     const color = randColor()
-    return { x: Math.round(x / size) * size, y: Math.round(y / size) * size, color: color}
+    return { x: Math.round(x / size) * size, y: Math.round(y / size) * size}
+}
+
+const food = {
+    x: randomPos().x,
+    y: randomPos().y,
+    color: randColor()
 }
 
 const snake = [
@@ -32,7 +39,7 @@ const snake = [
 ]
 
 const drawFood = () => {
-    const {x, y, color} = food()
+    const {x, y, color} = food
     ctx.shadowColor = color
     ctx.shadowBlur = 9
     ctx.fillStyle = color
@@ -71,7 +78,7 @@ const moveSnake = () => {
     snake.shift()
 }
 
-const drawGrid = ()=>{
+const drawGrid = ()=> {
     ctx.lineWidth = gridLineWidth
     ctx.strokeStyle = gridColor 
 
@@ -90,12 +97,33 @@ const drawGrid = ()=>{
     }
 }
 
+const checkEat = () => {
+    const head = snake[snake.length - 1]
+
+    if(head.x == food.x && head.y == food.y){
+        audio1.play()
+        snake.push(head)
+        let x = randomPos().x
+        let y = randomPos().y
+
+        while(snake.find((p)=> p.x == x && p.y == y)){
+            x = randomPos().x
+            y = randomPos().y
+        }
+
+        food.x = x
+        food.y = y
+        food.color = randColor()
+    }
+}
+
 const gameLoop = () => {
     clearTimeout(idTimer)
     ctx.clearRect(0,0,canvas.width,canvas.height)
     drawFood()
     moveSnake()
     drawSnake()
+    checkEat()
     if(grid){drawGrid()}
     idTimer = setTimeout(()=>{gameLoop()}, time)
 }
