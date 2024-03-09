@@ -6,6 +6,8 @@ const btnPlay = document.querySelector('.btn-play')
 const ctx = canvas.getContext('2d')
 const audio1 = new Audio('../assets/audio/message-13716.mp3')
 const size = 20
+const dificult = 5
+const initPos = {x:280, y:280}
 let time = 500
 const c1 = "#93827C"
 const c2 = "#79645C"
@@ -16,7 +18,8 @@ let idTimer, dir
 
 const scoreIncrement = ()=>{
     score.innerHTML = +score.innerHTML + 10
-    if (time < 5) { time = 5}else{time = time - (snake.length / 10)}
+    if (time < 5) { time = 5}else{time = time - (((+score.innerText * snake.length) * dificult) / 100)}
+    console.log(time)
 }
 
 const randNumber = (min, max)=> {
@@ -43,9 +46,7 @@ const food = {
     color: randColor()
 }
 
-let snake = [
-    {x:280, y:280}
-]
+let snake = [initPos]
 
 const drawFood = () => {
     const {x, y, color} = food
@@ -171,6 +172,6 @@ btnPlay.addEventListener('click', ()=>{
     menu.style.display = 'none'
     score.innerText = '00'
     
-    snake = [{x:280, y:280}]
+    snake = [initPos]
 })
 gameLoop()
