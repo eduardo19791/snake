@@ -6,7 +6,8 @@ const btnPlay = document.querySelector('.btn-play')
 const ctx = canvas.getContext('2d')
 const audio1 = new Audio('../assets/audio/message-13716.mp3')
 const size = 20
-const dificult = 5
+const dificult = 2
+const minTime = 90
 const initPos = {x:280, y:280}
 let time = 500
 const c1 = "#93827C"
@@ -18,8 +19,9 @@ let idTimer, dir
 
 const scoreIncrement = ()=>{
     score.innerHTML = +score.innerHTML + 10
-    if (time < 5) { time = 5}else{time = time - (((+score.innerText * snake.length) * dificult) / 100)}
-    console.log(time)
+    const t = time - (((+score.innerText * snake.length) * dificult) / 100)
+    if (t < minTime) { time = minTime}else{time = t}
+    if (+score.innerText > 1000){ time / 2}
 }
 
 const randNumber = (min, max)=> {
