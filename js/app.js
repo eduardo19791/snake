@@ -17,6 +17,7 @@ const gridColor = 'rgba(255,255,255,0.2)'
 const grid = true
 let idTimer, dir
 let time = initTime
+let pause = false
 
 const scoreIncrement = ()=>{
     score.innerHTML = +score.innerHTML + 10
@@ -152,6 +153,7 @@ const gameOver = () => {
 }
 
 const gameLoop = () => {
+    if(pause){return}
     clearTimeout(idTimer)
     ctx.clearRect(0,0,canvas.width,canvas.height)
     checkCollision()
@@ -164,6 +166,8 @@ const gameLoop = () => {
 }
 
 document.addEventListener('keydown', ({key})=>{
+    console.log(key)
+    if(key == 'Escape'){pause = !pause}
     if(key == 'w' && dir != 'down'){dir = 'up'}
     if(key == 's' && dir != 'up'){dir = 'down'}
     if(key == 'a' && dir != 'right'){dir = 'left'}
