@@ -1,14 +1,23 @@
 const canvas = document.querySelector('canvas')
+const score = document.querySelector('.score--value')
+const finalScore = document.querySelector('.final-score > span')
+const menu = document.querySelector('.menu-screen')
+const btnPlay = document.querySelector('.btn-play')
 const ctx = canvas.getContext('2d')
 const audio1 = new Audio('../assets/audio/message-13716.mp3')
 const size = 20
-const time = 500
+let time = 500
 const c1 = "#93827C"
 const c2 = "#79645C"
 const gridLineWidth = 0.5
 const gridColor = 'rgba(255,255,255,0.2)'
 const grid = true
 let idTimer, dir
+
+const scoreIncrement = ()=>{
+    score.innerHTML = +score.innerHTML + 10
+    if (time < 5) { time = 5}else{time = time - (snake.length / 10)}
+}
 
 const randNumber = (min, max)=> {
     return Math.round(Math.random() * (max - min) + min)
@@ -34,7 +43,7 @@ const food = {
     color: randColor()
 }
 
-const snake = [
+let snake = [
     {x:280, y:280}
 ]
 
@@ -102,6 +111,7 @@ const checkEat = () => {
 
     if(head.x == food.x && head.y == food.y){
         audio1.play()
+        scoreIncrement()
         snake.push(head)
         let x = randomPos().x
         let y = randomPos().y
@@ -130,7 +140,10 @@ const checkCollision = () => {
 }
 
 const gameOver = () => {
-    dir = undefined
+    dir = undefined;
+    menu.style.display = 'flex';
+    finalScore.innerText = score.innerText;
+    canvas.style.filter = 'blur(5px)';
 }
 
 const gameLoop = () => {
@@ -152,5 +165,12 @@ document.addEventListener('keydown', ({key})=>{
     if(key == 'a' && dir != 'right'){dir = 'left'}
     if(key == 'd' && dir != 'left'){dir = 'right'}
 
+})
+btnPlay.addEventListener('click', ()=>{
+    canvas.style.filter = 'none'
+    menu.style.display = 'none'
+    score.innerText = '00'
+    
+    snake = [{x:280, y:280}]
 })
 gameLoop()
