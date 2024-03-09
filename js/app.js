@@ -117,9 +117,26 @@ const checkEat = () => {
     }
 }
 
+const checkCollision = () => {
+    const head = snake[snake.length -1]
+    const neck = snake[snake.length - 2]
+
+    const wallCollision = head.x < 0 || head.x > (canvas.width - size) || head.y < 0 || head.y > (canvas.height - size)
+    const selfCollision = snake.find((p, k)=> { return k < neck && p.x == head.x && p.y == head.y})
+
+    if (wallCollision || selfCollision){
+        gameOver()
+    }
+}
+
+const gameOver = () => {
+    dir = undefined
+}
+
 const gameLoop = () => {
     clearTimeout(idTimer)
     ctx.clearRect(0,0,canvas.width,canvas.height)
+    checkCollision()
     drawFood()
     moveSnake()
     drawSnake()
