@@ -167,7 +167,7 @@ const gameLoop = () => {
 
 document.addEventListener('keydown', ({key})=>{
     console.log(key)
-    if(key == 'Escape'){pause = !pause}
+    if(key == 'Escape'){pause = !pause; gameLoop()}
     if(key == 'w' && dir != 'down'){dir = 'up'}
     if(key == 's' && dir != 'up'){dir = 'down'}
     if(key == 'a' && dir != 'right'){dir = 'left'}
