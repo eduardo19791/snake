@@ -155,7 +155,6 @@ const gameOver = () => {
     menu.style.display = 'flex';
     finalScore.innerText = Score;
     canvas.style.filter = 'blur(5px)';
-    Score = "00"
 }
 
 const gamePaused = () => {
@@ -192,6 +191,7 @@ btnPlay.addEventListener('click', ()=>{
     menu.style.display = 'none'
     score.innerText = '00'
     time = initTime
+    Score = "00"
     
     snake = [initPos]
 })
