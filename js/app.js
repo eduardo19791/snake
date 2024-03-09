@@ -2,6 +2,7 @@ const canvas = document.querySelector('canvas')
 const score = document.querySelector('.score--value')
 const finalScore = document.querySelector('.final-score > span')
 const menu = document.querySelector('.menu-screen')
+const menup = document.querySelector('.menu-paused')
 const btnPlay = document.querySelector('.btn-play')
 const ctx = canvas.getContext('2d')
 const audio1 = new Audio('../assets/audio/message-13716.mp3')
@@ -152,6 +153,14 @@ const gameOver = () => {
     canvas.style.filter = 'blur(5px)';
 }
 
+const gamePaused = () => {
+    dir = undefined
+    pause = !pause
+    if(pause){menup.style.display = 'flex'; canvas.style.filter = 'blur(5px)'; }
+    else{menup.style.display = 'none'; canvas.style.filter = 'none'; }
+    gameLoop()
+
+}
 const gameLoop = () => {
     if(pause){return}
     clearTimeout(idTimer)
@@ -166,7 +175,7 @@ const gameLoop = () => {
 }
 
 document.addEventListener('keydown', ({key})=>{
-    if(key == 'Escape'){pause = !pause; gameLoop()}
+    if(key == 'Escape'){gamePaused()}
     if(key == 'w' && dir != 'down'){dir = 'up'}
     if(key == 's' && dir != 'up'){dir = 'down'}
     if(key == 'a' && dir != 'right'){dir = 'left'}

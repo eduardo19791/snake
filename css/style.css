@@ -69,3 +69,20 @@ canvas {
     gap: 5px;
     cursor: pointer;
 }
+
+.menu-paused {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+}
+.paused {
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 4rem;
+}
+.aviso {
+    font-weight: 600;
+    font-size: 1.2rem;
+}
