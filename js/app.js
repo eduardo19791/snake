@@ -20,7 +20,9 @@ let time = initTime
 
 const scoreIncrement = ()=>{
     score.innerHTML = +score.innerHTML + 10
-    const t = time - (((+score.innerText * snake.length) * dificult) / 100)
+    const t = time
+    if (+score.innerText > 100 && +score.innerText < 250){t = time - (((+score.innerText * snake.length) * dificult) / 100)}
+    else if (+score.innerText > 500 && +score.innerText < 700){t = time - (((+score.innerText * snake.length) * dificult) / 100)}
     if (t < minTime) { time = minTime}else{time = t}
     if (+score.innerText > 1000){ time / 2}
 }
