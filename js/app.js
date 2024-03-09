@@ -182,3 +182,4 @@ btnPlay.addEventListener('click', ()=>{
     snake = [initPos]
 })
 gameLoop()
+
