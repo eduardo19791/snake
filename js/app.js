@@ -13,10 +13,18 @@ const randNumber = (min, max)=> {
     return Math.round(Math.random() * (max - min) + min)
 }
 
+const randColor = () => {
+    const r = randNumber(0, 255)
+    const g = randNumber(0, 255)
+    const b = randNumber(0, 255)
+    return `rgb(${r},${g},${b})`
+}
+
 const food = ()=> {
     const x = randNumber(0, canvas.width - size)
     const y = randNumber(0, canvas.height - size)
-    return { x: Math.round(x / size) * size, y: Math.round(y / size) * size, color: "yellow"}
+    const color = randColor()
+    return { x: Math.round(x / size) * size, y: Math.round(y / size) * size, color: color}
 }
 
 const snake = [
