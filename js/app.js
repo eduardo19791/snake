@@ -16,12 +16,15 @@ const c2 = "#79645C"
 const gridLineWidth = 0.5
 const gridColor = 'rgba(255,255,255,0.2)'
 const grid = true
+let Score = "00"
 let idTimer, dir
 let time = initTime
-let pause = false
+let _pause = false
+let _gameOver = false
 
 const scoreIncrement = ()=>{
-    score.innerHTML = +score.innerHTML + 10
+    Score = +Score + 10
+    score.innerHTML = Score
     const t = time - (((+score.innerText * snake.length) * dificult) / 100)
     if (t < minTime) { time = minTime}else{time = t}
 }
@@ -147,6 +150,7 @@ const checkCollision = () => {
 }
 
 const gameOver = () => {
+    _gameOver = true
     dir = undefined;
     menu.style.display = 'flex';
     finalScore.innerText = score.innerText;
@@ -154,14 +158,14 @@ const gameOver = () => {
 }
 
 const gamePaused = () => {
-    pause = !pause
-    if(pause){menup.style.display = 'flex'; canvas.style.filter = 'blur(5px)'; }
+    _pause = !_pause
+    if(_pause){menup.style.display = 'flex'; canvas.style.filter = 'blur(5px)'; }
     else{menup.style.display = 'none'; canvas.style.filter = 'none'; }
     gameLoop()
 
 }
 const gameLoop = () => {
-    if(pause){return}
+    if(_pause){return}
     clearTimeout(idTimer)
     ctx.clearRect(0,0,canvas.width,canvas.height)
     checkCollision()
@@ -174,7 +178,7 @@ const gameLoop = () => {
 }
 
 document.addEventListener('keydown', ({key})=>{
-    if(key == 'Escape'){gamePaused()}
+    if(key == 'Escape' && !_gameOver){gamePaused()}
     if(key == 'w' && dir != 'down'){dir = 'up'}
     if(key == 's' && dir != 'up'){dir = 'down'}
     if(key == 'a' && dir != 'right'){dir = 'left'}
@@ -182,6 +186,7 @@ document.addEventListener('keydown', ({key})=>{
 
 })
 btnPlay.addEventListener('click', ()=>{
+    _gameOver = false
     canvas.style.filter = 'none'
     menu.style.display = 'none'
     score.innerText = '00'
