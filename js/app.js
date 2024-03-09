@@ -154,7 +154,6 @@ const gameOver = () => {
 }
 
 const gamePaused = () => {
-    dir = undefined
     pause = !pause
     if(pause){menup.style.display = 'flex'; canvas.style.filter = 'blur(5px)'; }
     else{menup.style.display = 'none'; canvas.style.filter = 'none'; }
