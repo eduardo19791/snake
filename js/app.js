@@ -8,18 +8,26 @@ const gridLineWidth = 0.5
 const gridColor = 'rgba(255,255,255,0.2)'
 const grid = true
 let idTimer, dir
+
+const randNumber = (min, max)=> {
+    return Math.round(Math.random() * (max - min) + min)
+}
+const food = ()=> {
+    const x = randNumber(0, canvas.width - size)
+    const y = randNumber(0, canvas.height - size)
+    return { x: Math.round(x / size) * size, y: Math.round(y / size) * size, color: "yellow"}
+}
 const snake = [
     {x:280, y:280}
 ]
 
-const food = {
-    x: 80, y:80, color:'yellow'
-}
-
 const drawFood = () => {
     const {x, y, color} = food
+    ctx.shadowColor = color
+    ctx.shadowBlur = 9
     ctx.fillStyle = color
     ctx.fillRect(x,y,size,size)
+    ctx.shadowBlur = 0
 }
 
 const drawSnake = () => { 
@@ -54,12 +62,12 @@ const moveSnake = () => {
     snake.shift()
 }
 
-const gameLoop = ()=>{
+const gameLoop = () => {
     clearTimeout(idTimer)
     ctx.clearRect(0,0,canvas.width,canvas.height)
+    drawFood()
     moveSnake()
     drawSnake()
-    drawFood()
     if(grid){drawGrid()}
     idTimer = setTimeout(()=>{gameLoop()}, time)
 }
