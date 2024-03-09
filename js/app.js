@@ -132,10 +132,12 @@ const checkEat = () => {
 
 const checkCollision = () => {
     const head = snake[snake.length -1]
-    const neck = snake[snake.length - 2]
+    const neck = snake.length -2
 
     const wallCollision = head.x < 0 || head.x > (canvas.width - size) || head.y < 0 || head.y > (canvas.height - size)
-    const selfCollision = snake.find((p, k)=> { return k < neck && p.x == head.x && p.y == head.y})
+    const selfCollision = snake.find((p, k)=> { 
+        return k < neck && p.x == head.x && p.y == head.y
+    })
 
     if (wallCollision || selfCollision){
         gameOver()
@@ -162,7 +164,6 @@ const gameLoop = () => {
 }
 
 document.addEventListener('keydown', ({key})=>{
-
     if(key == 'w' && dir != 'down'){dir = 'up'}
     if(key == 's' && dir != 'up'){dir = 'down'}
     if(key == 'a' && dir != 'right'){dir = 'left'}
