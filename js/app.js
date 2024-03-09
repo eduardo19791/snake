@@ -9,13 +9,14 @@ const size = 20
 const dificult = 2
 const minTime = 90
 const initPos = {x:280, y:280}
-let time = 500
+const initTime = 500
 const c1 = "#93827C"
 const c2 = "#79645C"
 const gridLineWidth = 0.5
 const gridColor = 'rgba(255,255,255,0.2)'
 const grid = true
 let idTimer, dir
+let time = initTime
 
 const scoreIncrement = ()=>{
     score.innerHTML = +score.innerHTML + 10
@@ -173,6 +174,7 @@ btnPlay.addEventListener('click', ()=>{
     canvas.style.filter = 'none'
     menu.style.display = 'none'
     score.innerText = '00'
+    time = initTime
     
     snake = [initPos]
 })
