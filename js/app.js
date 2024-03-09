@@ -153,7 +153,7 @@ const gameOver = () => {
     _gameOver = true
     dir = undefined;
     menu.style.display = 'flex';
-    finalScore.innerText = score.innerText;
+    finalScore.innerText = Score;
     canvas.style.filter = 'blur(5px)';
 }
 
