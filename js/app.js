@@ -155,6 +155,7 @@ const gameOver = () => {
     menu.style.display = 'flex';
     finalScore.innerText = Score;
     canvas.style.filter = 'blur(5px)';
+    Score = "00"
 }
 
 const gamePaused = () => {
