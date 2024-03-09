@@ -8,7 +8,15 @@
 }
 
 body {
+<<<<<<< HEAD
+<<<<<<< HEAD
+    background: rgba(16, 9, 86, 1.0);
+=======
     background: rgba(10, 10, 10, 1.0);
+>>>>>>> 4e13467f7dae991468c380477ba3d43c72537084
+=======
+    background: rgba(10, 10, 10, 1.0);
+>>>>>>> d26f5f2aa7b8de1e4530c7492651228588fe17fd
     display: flex;
     min-height: 100vh;
     align-items: center;
